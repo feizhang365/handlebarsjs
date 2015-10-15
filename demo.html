@@ -1,0 +1,34 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>handlebars demo</title>
+</head>
+<body>
+	<!-- handlebars template -->
+	<script id="entry-template" type="text/x-handlebars-template">
+	  <div class="entry">
+	    <h1>{{title}}</h1>
+	    <div class="body">
+	      {{body}}
+	    </div>
+	  </div>
+	</script>
+
+	<!-- import jquery lib -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var source   = $("#entry-template").html();
+			// console.log(source);
+			var template = Handlebars.compile(source);
+			var context = {title: "My New Post", body: "This is my first post!"};
+			var html    = template(context);
+			//console.log(html);
+			$("body").html(html);
+		})
+	</script>
+</body>
+</html>
+
