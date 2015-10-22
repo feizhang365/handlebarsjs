@@ -1,0 +1,44 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>handlebars demo</title>
+</head>
+<body>
+
+	<!-- handlebars template #each可以遍历数据.-->
+	<script id="example-template" type="text/x-handlebars-template">  
+	  
+	  <!-- 遍历people -->  
+	  
+	  {{#each people}}  
+	  
+	    <!-- 直接使用每个people的数据 -->  
+	    <p>{{firstName}} {{lastName}}</p>  
+	  
+	  {{/each}}  
+	  
+	</script>  
+
+	<!-- import jquery lib -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.js"></script>
+	<script type="text/javascript">
+	$(function () {
+	  var theTemplateScript = $("#example-template").html();
+	  var theTemplate = Handlebars.compile(theTemplateScript);
+	  var contextX = {
+	    people: [ 
+	      { firstName: 'fei', lastName: 'Zhang' },
+	      { firstName: 'san', lastName: 'Zhang' },
+	      { firstName: 'si', lastName: 'Li' },
+	      { firstName: 'wu', lastName: 'Wang' }
+	    ]
+	  };
+	  var theCompiledHtml = theTemplate(contextX);
+	  $(document.body).append(theCompiledHtml);
+	});
+	</script>
+</body>
+</html>
+

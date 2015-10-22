@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>handlebars demo</title>
+</head>
+<body>
+	<!-- handlebars template -->
+	<script id="built-in-helpers-template" type="text/x-handlebars-template">
+	  {{#each animals}}
+	    <p>
+	      The {{capitalize this.name}} says
+	      {{#if this.noise}}
+	        "{{capitalize this.noise}}".
+	      {{else}}
+	        nothing since its a {{this.name}}.
+	      {{/if}}
+	    </p>
+	  {{/each}}
+	</script>
+
+	<div class="content-placeholder"></div>
+
+	<!-- import jquery lib -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.js"></script>
+	<script type="text/javascript">
+		$(function () {  
+		  // 定义a helper  
+		  Handlebars.registerHelper('capitalize', function(str){  
+		    // str is the argument passed to the helper when called  
+		    str = str || '';  
+		    return str.slice(0,1).toUpperCase() + str.slice(1);  
+		  });  
+		  var theTemplateScript = $("#built-in-helpers-template").html();  
+		  var theTemplate = Handlebars.compile(theTemplateScript);  
+		  var context = {  
+		    animals:[  
+		      {  
+		        name: "cow",  
+		        noise: "moooo"  
+		      },  
+		      {  
+		        name: "cat",  
+		        noise: "meow"  
+		      },  
+		      {  
+		        name: "fish",  
+		        noise: ""  
+		      },  
+		      {  
+		        name: "farmer",  
+		        noise: "Get off my property!"  
+		      }  
+		    ]  
+		  };  
+		  var theCompiledHtml = theTemplate(context);  
+		  $('.content-placeholder').html(theCompiledHtml);  
+		});  
+	</script>
+</body>
+</html>
+
